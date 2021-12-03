@@ -26,6 +26,7 @@ const run = async (
   const inputFilename = isDummyInput ? "input-dummy.txt" : "input.txt";
   const input = fs
     .readFileSync(path.join(__dirname, day, inputFilename), "utf8")
+    .trim()
     .split("\n");
 
   const puzzleFilename = isAdvancedPuzzle ? "puzzle-2.js" : "puzzle.js";
