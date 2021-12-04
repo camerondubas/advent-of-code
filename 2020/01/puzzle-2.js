@@ -1,10 +1,7 @@
-const input = require("./input");
-const sanitizedInput = input.split("\n").map((num) => parseInt(num));
-
 const fixExpenseReport = (input) => {
   const target = 2020;
   const sortedInput = input.sort((a, b) => a - b);
-  const indices = [0,1,2]
+  const indices = [0, 1, 2];
 
   while (true) {
     const sum = indices.reduce((acc, index) => acc + sortedInput[index], 0);
@@ -31,5 +28,7 @@ const fixExpenseReport = (input) => {
   return indices.reduce((acc, index) => acc * sortedInput[index], 1);
 };
 
-const output = fixExpenseReport(sanitizedInput);
-console.log(output);
+module.exports = (input) => {
+  const sanitizedInput = input.split("\n").map((num) => parseInt(num));
+  return fixExpenseReport(sanitizedInput);
+};
