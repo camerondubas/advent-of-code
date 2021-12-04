@@ -1,7 +1,5 @@
-const getRating = (input, comparison) => {
-  let instructions = input;
-
-  for (let idx = 0; idx < input[0].length; idx++) {
+const getRating = (instructions, comparison) => {
+  for (let idx = 0; idx < instructions[0].length; idx++) {
     const bitCounter = instructions.reduce(
       (acc, cur) => acc + (cur[idx] === "1" ? 1 : -1),
       0
@@ -18,8 +16,10 @@ const getRating = (input, comparison) => {
 };
 
 const output = (input) => {
-  const oxygenGeneratorRating = getRating(input, (count) => count >= 0);
-  const scrubberRating = getRating(input, (count) => count < 0);
+  const instructions = input.split("\n");
+
+  const oxygenGeneratorRating = getRating(instructions, (count) => count >= 0);
+  const scrubberRating = getRating(instructions, (count) => count < 0);
 
   return oxygenGeneratorRating * scrubberRating;
 };

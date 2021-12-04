@@ -1,5 +1,6 @@
 const output = (input) => {
   return input
+    .split("\n")
     .map((input) => parseInt(input))
     .reduce((acc, _, idx, arr) => {
       const window = [arr[idx], arr[idx + 1], arr[idx + 2]];

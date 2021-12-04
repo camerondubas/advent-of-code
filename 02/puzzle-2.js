@@ -3,7 +3,7 @@ const output = (input) => {
   let horizontalPosition = 0;
   let aim = 0;
 
-  for (const instruction of input) {
+  for (const instruction of input.split("\n")) {
     const [direction, amount] = instruction.split(" ");
     const amountNumber = parseInt(amount);
 
