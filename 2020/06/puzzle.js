@@ -1,15 +1,5 @@
 const output = (input) => {
-  const groups = input.reduce(
-    (acc, cur) => {
-      if (cur !== "") {
-        acc[acc.length - 1] += cur;
-      } else {
-        acc.push(cur);
-      }
-      return acc;
-    },
-    [""]
-  );
+  const groups = input.split("\n\n").map((group) => group.replaceAll("\n", ""));
 
   const uniquesPerGroup = groups.map((group) => [...new Set(group)].length);
   const sumOfUniques = uniquesPerGroup.reduce((acc, cur) => acc + cur, 0);

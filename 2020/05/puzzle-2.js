@@ -17,7 +17,7 @@ const binarySpacePartitioning = (items, lowerChar, upperChar) => {
 const output = (input) => {
   let seatIds = [];
 
-  for (const item of input) {
+  for (const item of input.split("\n")) {
     let rows = item.slice(0, 7).split("");
     let seats = item.slice(7, Infinity).split("");
 

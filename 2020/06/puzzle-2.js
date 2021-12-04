@@ -1,15 +1,7 @@
 const output = (input) => {
-  const groups = input.reduce(
-    (acc, cur) => {
-      if (cur !== "") {
-        acc[acc.length - 1].push([...cur]);
-      } else {
-        acc.push([]);
-      }
-      return acc;
-    },
-    [[]]
-  );
+  const groups = input
+    .split("\n\n")
+    .map((group) => group.split("\n").map((row) => row.split("")));
 
   let sum = 0;
   for (const group of groups) {
