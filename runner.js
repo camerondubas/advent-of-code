@@ -5,6 +5,7 @@ const program = new Command();
 
 program
   .version("2021.0.1")
+  .argument("<year>", "Which year to run")
   .argument("<day>", "Which day to run")
   .option("-a --advanced", "Which puzzle to run on that day (1 or 2)", false)
   .option("-d --dummy", "Use dummy input", false)
@@ -19,18 +20,20 @@ program
     "Specify name of file within the target day's directory"
   );
 
-const getPuzzle = async (day, isPartTwo, file) => {
+const getPuzzle = async (year, day, isPartTwo, file) => {
   let filename = file || (isPartTwo ? "puzzle-2.js" : "puzzle.js");
 
-  const puzzlePath = path.join(__dirname, day, filename);
+  const puzzlePath = path.join(__dirname, year, day, filename);
   const { default: puzzle } = await import(puzzlePath);
 
   return puzzle;
 };
 
-const getInput = (day, isDummyInput) => {
+const getInput = (year, day, isDummyInput) => {
   const filename = isDummyInput ? "input-dummy.txt" : "input.txt";
-  return fs.readFileSync(path.join(__dirname, day, filename), "utf8").trim();
+  return fs
+    .readFileSync(path.join(__dirname, year, day, filename), "utf8")
+    .trim();
 };
 
 const getRunner = (data) => {
@@ -72,7 +75,8 @@ const getRunner = (data) => {
 
 const run = async (program) => {
   const { dummy, advanced, metrics, metricsRuns, file } = program.opts();
-  const day = program.args[0].padStart(2, "0");
+  const year = program.args[0];
+  const day = program.args[1].padStart(2, "0");
   const data = {
     showMetrics: metrics,
     metricsRuns,
@@ -82,8 +86,8 @@ const run = async (program) => {
     file,
   };
 
-  const input = getInput(day, dummy);
-  const puzzle = await getPuzzle(day, advanced, file);
+  const input = getInput(year, day, dummy);
+  const puzzle = await getPuzzle(year, day, advanced, file);
   const runner = getRunner(data);
 
   return runner(puzzle, input);
