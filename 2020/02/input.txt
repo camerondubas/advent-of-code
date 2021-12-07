@@ -1,4 +1,3 @@
-module.exports = `
 13-14 f: ffffffffnfffvv
 10-12 w: kwtzpnzspwwwdz
 2-3 n: nnjn
@@ -999,4 +998,3 @@ module.exports = `
 1-2 v: pwbr
 15-18 r: xrrrbrrrgrpbrprrqrqr
 2-4 g: zgggp
-`;
