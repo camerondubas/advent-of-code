@@ -45,7 +45,7 @@ In this example, a path with the lowest total risk is highlighted here:
 31254216<b>3</b>9
 12931385<b>21</b>
 231194458<b>1</b>
-```
+</pre>
 
 The total risk of this path is `40`
 (the starting position is never entered, so its risk is not counted).
