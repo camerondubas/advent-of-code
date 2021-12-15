@@ -16,3 +16,12 @@
 12. [Passage Pathing](/2021/12)
 13. [Transparent Origami](/2021/13)
 14. [Extended Polymerization](/2021/14)
+
+## 2020
+
+1. [Report Repair](/2020/01)
+2. [Password Philosophy](/2020/01)
+3. [Toboggan Trajectory](/2020/01)
+4. [Passport Processing](/2020/01)
+5. [Binary Boarding](/2020/01)
+6. [Custom Customs](/2020/01)
