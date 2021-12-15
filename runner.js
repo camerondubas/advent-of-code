@@ -51,14 +51,14 @@ const getRunner = (data) => {
       }
       console.log("------------------");
       let runtimes = [];
+      let output;
       for (let index = 0; index < data.metricsRuns; index++) {
         let t0 = performance.now();
-        puzzle(input);
+        output = puzzle(input);
         let t1 = performance.now();
         runtimes.push(t1 - t0);
       }
       const runtimesSum = runtimes.reduce((acc, cur) => acc + cur, 0);
-      let output = puzzle(input);
       console.log("Number of Runs: ", data.metricsRuns);
       console.log(
         "Avg Runtime (ms):",
