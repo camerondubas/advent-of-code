@@ -21,8 +21,8 @@
 ## 2020
 
 1. [Report Repair](/2020/01)
-2. [Password Philosophy](/2020/01)
-3. [Toboggan Trajectory](/2020/01)
-4. [Passport Processing](/2020/01)
-5. [Binary Boarding](/2020/01)
-6. [Custom Customs](/2020/01)
+2. [Password Philosophy](/2020/02)
+3. [Toboggan Trajectory](/2020/03)
+4. [Passport Processing](/2020/04)
+5. [Binary Boarding](/2020/05)
+6. [Custom Customs](/2020/06)
