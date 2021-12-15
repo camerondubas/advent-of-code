@@ -16,6 +16,7 @@
 12. [Passage Pathing](/2021/12)
 13. [Transparent Origami](/2021/13)
 14. [Extended Polymerization](/2021/14)
+15. [Chiton](/2021/15)
 
 ## 2020
 
