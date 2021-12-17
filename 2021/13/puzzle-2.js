@@ -1,4 +1,4 @@
-const fillChar = ".";
+const fillChar = " ";
 
 const foldUp = (grid, idx) => {
   let top = grid.slice(0, idx);
@@ -60,13 +60,11 @@ const output = (input) => {
   });
 
   let output = grid;
-  // folds.forEach((fold) => {
-  //   output = applyFold(fold, output);
-  // });
+  folds.forEach((fold) => {
+    output = applyFold(fold, output);
+  });
 
   output = output.map((row) => row.join("")).join("\n");
-  fs = require("fs");
-  fs.writeFile("output.txt", output, "utf-8", () => {});
   return output;
 };
 

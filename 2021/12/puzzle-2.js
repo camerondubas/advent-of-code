@@ -7,6 +7,7 @@ class Graph {
     this.edges = new Map();
   }
 
+  // LOL
   nodes() {
     console.log("=== Nodes ===");
     let nodes = [];
