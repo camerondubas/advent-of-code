@@ -1,29 +1,10 @@
 const fs = require("fs");
 const path = require("path");
-const { Command } = require("commander");
-const program = new Command();
-
-program
-  .version("2021.0.1")
-  .argument("<year>", "Which year to run")
-  .argument("<day>", "Which day to run")
-  .option("-a --advanced", "Which puzzle to run on that day (1 or 2)", false)
-  .option("-d --dummy", "Use dummy input", false)
-  .option("-m --metrics", "Log runtime & other metrics", false)
-  .option(
-    "--metrics-runs <amount>",
-    "Number of times to run the puzzle, for metrics logging",
-    1000
-  )
-  .option(
-    "-f --file <name>",
-    "Specify name of file within the target day's directory"
-  );
 
 const getPuzzle = async (year, day, isPartTwo, file) => {
   let filename = file || (isPartTwo ? "puzzle-2.js" : "puzzle.js");
 
-  const puzzlePath = path.join(__dirname, year, day, filename);
+  const puzzlePath = path.join(global.appRoot, year, day, filename);
   const { default: puzzle } = await import(puzzlePath);
 
   return puzzle;
@@ -31,8 +12,9 @@ const getPuzzle = async (year, day, isPartTwo, file) => {
 
 const getInput = (year, day, isDummyInput) => {
   const filename = isDummyInput ? "input-dummy.txt" : "input.txt";
+
   return fs
-    .readFileSync(path.join(__dirname, year, day, filename), "utf8")
+    .readFileSync(path.join(global.appRoot, year, day, filename), "utf8")
     .trim();
 };
 
@@ -73,10 +55,9 @@ const getRunner = (data) => {
   return (puzzle, input) => puzzle(input);
 };
 
-const run = async (program) => {
-  const { dummy, advanced, metrics, metricsRuns, file } = program.opts();
-  const year = program.args[0];
-  const day = program.args[1].padStart(2, "0");
+const run = async (year, _day, options) => {
+  const { dummy, advanced, metrics, metricsRuns, file } = options;
+  const day = _day.padStart(2, "0");
   const data = {
     showMetrics: metrics,
     metricsRuns,
@@ -93,16 +74,4 @@ const run = async (program) => {
   return runner(puzzle, input);
 };
 
-program.parse();
-
-run(program)
-  .then((output) => {
-    console.log(output);
-  })
-  .catch((err) => {
-    if (err.code === "ENOENT") {
-      console.log("Error: Could not find this puzzle.");
-    } else {
-      throw err;
-    }
-  });
+module.exports = run;
