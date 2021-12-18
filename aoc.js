@@ -36,6 +36,7 @@ program
       });
   })
   .command("generate <year> <day>")
+  .alias("g")
   .action((year, day, options) => {
     generate(year, day, options);
   });
