@@ -1,10 +1,11 @@
+#!/usr/bin/env node
 const { Command } = require("commander");
 const path = require("path");
-const { run, generate } = require("./cli");
+const { run, generate } = require("../cli");
 require("dotenv").config();
 
 const program = new Command();
-global.appRoot = path.resolve(__dirname);
+global.appRoot = path.resolve(path.join(__dirname, ".."));
 
 program
   .version("2021.0.1")

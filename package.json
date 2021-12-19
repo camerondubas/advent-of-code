@@ -1,6 +1,6 @@
 {
   "name": "advent-of-code-2021",
-  "version": "1.0.0",
+  "version": "2021.H0.H0.H0",
   "description": "",
   "main": "aoc.js",
   "scripts": {
@@ -28,6 +28,9 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.5.1"
+  },
+  "bin": {
+    "aoc": "./bin/index.js"
   },
   "engines": {
     "node": ">= 16.13.0"
