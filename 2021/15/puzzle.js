@@ -81,13 +81,8 @@ const output = (input) => {
     currentPoint =
       lowestIndex !== undefined && openList.splice(lowestIndex, 1)[0];
 
-    console.log("=============");
-    console.log("Step: ", num);
-    console.log("Current Point: ", currentPoint);
     if (currentPoint) {
       closedList.push(currentPoint);
-    } else {
-      throw "Fuck!";
     }
 
     // add posible spots to open list
@@ -123,12 +118,6 @@ const output = (input) => {
     step(index + 1);
     index++;
   }
-
-  console.log("-------------");
-  console.log("end");
-  // console.log("Current Point: ", currentPoint);
-  // console.log("Open List: ", openList);
-  // console.log("Closed List: ", closedList.map(p));
 
   let sum = 0;
   let target = closedList.reverse()[0];
