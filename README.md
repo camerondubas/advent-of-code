@@ -17,6 +17,8 @@
 13. [Transparent Origami](/2021/13)
 14. [Extended Polymerization](/2021/14)
 15. [Chiton](/2021/15)
+16. [Packet Decoder](/2021/16)
+17. [Trick Shot](/2021/17)
 
 ## 2020
 
