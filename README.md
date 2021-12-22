@@ -19,6 +19,7 @@
 15. [Chiton](/2021/15)
 16. [Packet Decoder](/2021/16)
 17. [Trick Shot](/2021/17)
+18. [Snailfish](/2021/18)
 
 ## 2020
 
