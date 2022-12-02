@@ -1,3 +1,5 @@
+[Rust Solution](../../src/year_2022/day_01.rs)
+
 # --- Day 1: Calorie Counting ---
 
 Santa's reindeer typically eat regular reindeer food, but they need a lot of magical

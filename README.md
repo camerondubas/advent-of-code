@@ -1,5 +1,10 @@
 # Advent Of Code
 
+## 2022
+1. [Calorie Counting](/2022/01)
+2. [Rock Paper Scissors](/2022/02)
+3. [Rucksack Reorganization](/2022/03)
+
 ## 2021
 
 1. [Sonar Sweep](/2021/01)

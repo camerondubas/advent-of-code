@@ -1,3 +1,5 @@
+[Rust Solution](../../src/year_2022/day_02.rs)
+
 # --- Day 2: Rock Paper Scissors ---
 
 The Elves begin to set up camp on the beach. To decide whose tent gets to be
