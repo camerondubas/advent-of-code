@@ -13,27 +13,26 @@ fn main() {
     println!("Solution: {:?}", part_2(&contents));
 }
 
-const ROCK: u8 = 1;
-const PAPER: u8 = 2;
-const SCISSORS: u8 = 3;
+const ROCK: u32 = 1;
+const PAPER: u32 = 2;
+const SCISSORS: u32 = 3;
 
-const WIN: u8 = 6;
-const DRAW: u8 = 3;
-const LOSE: u8 = 0;
+const WIN: u32 = 6;
+const DRAW: u32 = 3;
+const LOSE: u32 = 0;
 
 fn part_1(input: &String) -> u32 {
-    let pairs = input.lines().map(|line| {
-        line.chars()
+    let scores = input.lines().map(|line| {
+        let pair: Vec<u32> = line
+            .chars()
             .filter_map(|c| match c {
                 'A' | 'X' => Some(ROCK),
                 'B' | 'Y' => Some(PAPER),
                 'C' | 'Z' => Some(SCISSORS),
                 _ => None,
             })
-            .collect()
-    });
+            .collect();
 
-    pairs.fold(0, |acc, pair: Vec<u8>| {
         let score = match (pair[0], pair[1]) {
             (ROCK, PAPER) => WIN,
             (ROCK, SCISSORS) => LOSE,
@@ -44,13 +43,16 @@ fn part_1(input: &String) -> u32 {
             _ => DRAW,
         };
 
-        acc + Into::<u32>::into(score + pair[1])
-    })
+        score + pair[1]
+    });
+
+    scores.sum()
 }
 
 fn part_2(input: &String) -> u32 {
-    let pairs = input.lines().map(|line| {
-        line.chars()
+    let scores = input.lines().map(|line| {
+        let pair: Vec<u32> = line
+            .chars()
             .filter_map(|c| match c {
                 'A' => Some(ROCK),
                 'B' => Some(PAPER),
@@ -60,10 +62,8 @@ fn part_2(input: &String) -> u32 {
                 'Z' => Some(WIN),
                 _ => None,
             })
-            .collect()
-    });
+            .collect();
 
-    pairs.fold(0, |acc, pair: Vec<u8>| {
         let score = match (pair[0], pair[1]) {
             (ROCK, WIN) => PAPER,
             (ROCK, LOSE) => SCISSORS,
@@ -74,6 +74,8 @@ fn part_2(input: &String) -> u32 {
             _ => pair[0],
         };
 
-        acc + Into::<u32>::into(score + pair[1])
-    })
+        score + pair[1]
+    });
+
+    scores.sum()
 }
