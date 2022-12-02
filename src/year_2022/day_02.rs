@@ -1,17 +1,4 @@
-use std::env;
-use std::fs;
-
-fn main() {
-    let args: Vec<String> = env::args().collect();
-    let file_path = &args[1];
-    let contents = fs::read_to_string(file_path).expect("Should have been able to read the file");
-
-    println!("=== Part 1 ===");
-    println!("Solution: {:?}", part_1(&contents));
-
-    println!("=== Part 2 ===");
-    println!("Solution: {:?}", part_2(&contents));
-}
+use crate::runner::run;
 
 const ROCK: u32 = 1;
 const PAPER: u32 = 2;
@@ -20,6 +7,11 @@ const SCISSORS: u32 = 3;
 const WIN: u32 = 6;
 const DRAW: u32 = 3;
 const LOSE: u32 = 0;
+
+pub fn solution(contents: String) {
+    run("Part 1", part_1, &contents);
+    run("Part 2", part_2, &contents);
+}
 
 fn part_1(input: &String) -> u32 {
     let scores = input.lines().map(|line| {

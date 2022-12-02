@@ -3,3 +3,8 @@ node_modules
 
 target
 **/rust/target
+
+
+# Added by cargo
+
+/target

@@ -8,17 +8,21 @@ fn main() {
 
     let year = &args[1].as_str();
     let day = &args[2].as_str();
-    let input = if (&args[3]).eq("dummy") {
+    let input = if args.len().gt(&3) && (&args[3]).eq("dummy") {
         "input-dummy"
     } else {
         "input"
     };
     let file_path = format!("./{}/{}/{}.txt", year, day, input);
-    println!("file_path: {}", file_path);
     let contents = fs::read_to_string(file_path).expect("Should have been able to read the file");
+
+    // Insert empty line to make the output look nicer
+    println!("");
 
     match *year {
         "2022" => match *day {
+            "01" => aoc::year_2022::day_01::solution(contents),
+            "02" => aoc::year_2022::day_02::solution(contents),
             "03" => aoc::year_2022::day_03::solution(contents),
             _ => println!("No solution for this day"),
         },
