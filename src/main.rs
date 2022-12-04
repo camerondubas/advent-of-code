@@ -24,6 +24,7 @@ fn main() {
             "01" => aoc::year_2022::day_01::solution(contents),
             "02" => aoc::year_2022::day_02::solution(contents),
             "03" => aoc::year_2022::day_03::solution(contents),
+            "04" => aoc::year_2022::day_04::solution(contents),
             _ => println!("No solution for this day"),
         },
         _ => panic!("Year not implemented"),
