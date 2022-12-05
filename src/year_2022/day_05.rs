@@ -6,16 +6,14 @@ pub fn solution(contents: String) {
     run("Part 2", part_2, &contents);
 }
 
-fn part_1(input: &String) -> String {
-    let mut sections = input.split("\n\n");
-    let mut stacks = sections.next().unwrap().lines().rev();
-    let mut instructions = sections.next().unwrap();
+fn compute_stacks(raw_stacks: &str) -> Vec<Vec<char>> {
+    let mut rev = raw_stacks.lines().rev();
 
     // ignore the first line
-    stacks.next();
+    rev.next();
 
     let mut computed_stacks: Vec<Vec<char>> = vec![];
-    for line in stacks {
+    for line in rev {
         line.chars().enumerate().for_each(|(char_idx, char)| {
             if char.is_alphabetic() {
                 let stack_idx = (char_idx - 1) / 4;
@@ -27,49 +25,58 @@ fn part_1(input: &String) -> String {
         });
     }
 
-    let mut computed_instructions: Vec<(u32, u32, u32)> = vec![];
-    for instruction in instructions.lines() {
-        let mut temp_vec: Vec<u32> = vec![];
-        instruction.split_whitespace().for_each(|word| {
-            if word.parse::<u32>().is_ok() {
-                temp_vec.push(word.parse::<u32>().unwrap());
-            }
-        });
-
-        let b = temp_vec
-            .iter()
-            .collect_tuple::<(&u32, &u32, &u32)>()
-            .unwrap();
-        computed_instructions.push((*b.0, *b.1, *b.2));
-    }
-
-    println!("{:?}", computed_stacks);
-    // println!("{:?}", computed_instructions);
-
-    for (count, from, to) in computed_instructions.iter() {
-        println!("");
-        println!("{} {} {}", count, from, to);
-        let from_index = (from - 1) as usize;
-        let to_index = (to - 1) as usize;
-        let split_index = computed_stacks[from_index].len() - (*count) as usize;
-
-        let mut items = computed_stacks[from_index].split_off(split_index);
-        // Part 2 Change 👇
-        // items.reverse();
-        println!("{:?}", items);
-        computed_stacks[to_index].append(&mut items);
-        println!("{:?}", computed_stacks);
-    }
-
-    let a = computed_stacks
-        .iter()
-        .map(|stack| stack.last().unwrap())
-        .join("");
-
-    a
+    computed_stacks
 }
 
-fn part_2(input: &String) -> u32 {
-    input;
-    0
+fn compute_instructions(raw_instructions: &str) -> Vec<(usize, usize, usize)> {
+    let mut computed_instructions: Vec<(usize, usize, usize)> = vec![];
+    for instruction in raw_instructions.lines() {
+        let computed_instruction = instruction
+            .split_whitespace()
+            .filter_map(|word| match word.parse::<usize>() {
+                Err(_) => None,
+                Ok(num) => Some(num),
+            })
+            .collect_tuple::<(usize, usize, usize)>()
+            .unwrap();
+        computed_instructions.push(computed_instruction);
+    }
+
+    computed_instructions
+}
+fn part_1(input: &String) -> String {
+    let mut sections = input.split("\n\n");
+    let mut computed_stacks = compute_stacks(sections.next().unwrap());
+    let computed_instructions = compute_instructions(sections.next().unwrap());
+
+    for (count, from, to) in computed_instructions.iter() {
+        let split_index = computed_stacks[from - 1].len() - count;
+
+        let mut items = computed_stacks[from - 1].split_off(split_index);
+        items.reverse();
+        computed_stacks[to - 1].append(&mut items);
+    }
+    computed_stacks
+        .iter()
+        .map(|stack| stack.last().unwrap())
+        .join("")
+}
+
+fn part_2(input: &String) -> String {
+    let mut sections = input.split("\n\n");
+    let mut computed_stacks = compute_stacks(sections.next().unwrap());
+    let computed_instructions = compute_instructions(sections.next().unwrap());
+
+    for (count, from, to) in computed_instructions.iter() {
+        let split_index = computed_stacks[from - 1].len() - count;
+
+        let mut items = computed_stacks[from - 1].split_off(split_index);
+        // Part 2 Change 👇
+        // items.reverse();
+        computed_stacks[to - 1].append(&mut items);
+    }
+    computed_stacks
+        .iter()
+        .map(|stack| stack.last().unwrap())
+        .join("")
 }
