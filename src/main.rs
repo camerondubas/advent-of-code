@@ -19,15 +19,5 @@ fn main() {
     // Insert empty line to make the output look nicer
     println!("");
 
-    match *year {
-        "2022" => match *day {
-            "01" => aoc::year_2022::day_01::solution(contents),
-            "02" => aoc::year_2022::day_02::solution(contents),
-            "03" => aoc::year_2022::day_03::solution(contents),
-            "04" => aoc::year_2022::day_04::solution(contents),
-            "05" => aoc::year_2022::day_05::solution(contents),
-            _ => println!("No solution for this day"),
-        },
-        _ => panic!("Year not implemented"),
-    }
+    aoc::runner::run_day(*year, *day, contents);
 }
