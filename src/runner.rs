@@ -41,6 +41,7 @@ fn get_solution(year: &str, day: &str) -> fn(String) {
             "04" => year_2022::day_04::solution,
             "05" => year_2022::day_05::solution,
             "06" => year_2022::day_06::solution,
+            "07" => year_2022::day_07::solution,
             _ => panic!("No solution for this day"),
         },
         _ => panic!("Year not implemented"),
