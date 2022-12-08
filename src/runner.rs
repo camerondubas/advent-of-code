@@ -1,7 +1,7 @@
 use colored::Colorize;
 use std::{fmt::Debug, time::Instant};
 
-use crate::year_2022;
+use crate::{year_2017, year_2022};
 
 pub fn run<T>(name: &str, func: fn(&String) -> T, input: &String)
 where
@@ -30,6 +30,10 @@ pub fn run_day(year: &str, day: &str, contents: String) {
 
 fn get_solution(year: &str, day: &str) -> fn(String) {
     match year {
+        "2017" => match day {
+            "11" => year_2017::day_11::solution,
+            _ => panic!("No solution for this day"),
+        },
         "2022" => match day {
             "01" => year_2022::day_01::solution,
             "02" => year_2022::day_02::solution,
