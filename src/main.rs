@@ -8,10 +8,10 @@ fn main() {
 
     let year = &args[1].as_str();
     let day = &args[2].as_str();
-    let input = if args.len().gt(&3) && (&args[3]).eq("dummy") {
-        "input-dummy"
-    } else {
-        "input"
+    let mut input = String::from("input");
+    if args.len().gt(&3) {
+        input.push('-');
+        input.push_str(&args[3]);
     };
     let file_path = format!("./{}/{}/{}.txt", year, day, input);
     let contents = fs::read_to_string(file_path).expect("Should have been able to read the file");
