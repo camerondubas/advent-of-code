@@ -1,6 +1,7 @@
 use std::vec;
 
 use crate::runner::run;
+use colored::Colorize;
 use itertools::Itertools;
 
 pub fn solution(contents: String) {
@@ -88,8 +89,30 @@ fn update_crt(crt: &mut Vec<&str>, cycle_num: i32, sprite_position: i32) {
 }
 
 fn draw_crt(crt: &Vec<&str>) {
-    let crt_lines = crt.chunks(40).map(|chunk| chunk.join("")).collect_vec();
-    for crt_line in crt_lines {
+    // let crt_lines = crt.chunks(40).map(|chunk| chunk.join("")).collect_vec();
+    // for crt_line in crt_lines {
+    //     println!("{}", crt_line);
+    // }
+
+    println!("");
+    let mut line = String::from("");
+    crt.iter().for_each(|char| {
+        let colored_char = match *char {
+            "#" => " ".on_black(),
+            _ => " ".on_green(),
+        };
+
+        line.push_str(&colored_char.to_string());
+    });
+
+    let crt_lines2: Vec<String> = line
+        .chars()
+        .collect::<Vec<char>>()
+        .chunks(40 * 10)
+        .map(|c| c.iter().collect::<String>())
+        .collect_vec();
+
+    for crt_line in crt_lines2 {
         println!("{}", crt_line);
     }
 }
