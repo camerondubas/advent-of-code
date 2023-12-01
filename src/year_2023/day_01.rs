@@ -26,7 +26,7 @@ const NUM_WORDS: [(&str, char); 18] = [
     ("9", '9'),
 ];
 
-fn part_1(input: &String) -> u32 {
+pub fn part_1(input: &String) -> u32 {
     let mut sum = 0;
 
     for line in input.lines() {
@@ -66,7 +66,7 @@ fn part_1(input: &String) -> u32 {
     sum
 }
 
-fn part_2(input: &String) -> u32 {
+pub fn part_2(input: &String) -> u32 {
     let mut sum = 0;
 
     for line in input.lines() {
