@@ -81,8 +81,9 @@ impl Grid {
 
 fn part_1(input: &String) -> u32 {
     let grid = Grid::new(input);
+    let end = &grid.points[grid.end.1][grid.end.0];
 
-    let a = cam_star(
+    let path = cam_star(
         &grid.points[grid.start.1][grid.start.0],
         |point| {
             grid.get_neighbors(point)
@@ -91,22 +92,21 @@ fn part_1(input: &String) -> u32 {
                 .collect_vec()
         },
         |point| {
-            let end = &grid.points[grid.end.1][grid.end.0];
             let delta_x = (end.x as i32 - point.x as i32).abs();
             let delta_y = (end.y as i32 - point.y as i32).abs();
-            let h = (delta_x + delta_y) as u32;
-            h
+            (delta_x + delta_y) as u32
         },
-        |point| point == &grid.points[grid.end.1][grid.end.0],
+        |point| point == end,
     );
 
-    a.unwrap().1
+    path.unwrap().1
 }
 
 fn part_2(input: &String) -> u32 {
     let grid = Grid::new(input);
-
-    let a_points_with_b_neighbor = grid
+    let end = &grid.points[grid.end.1][grid.end.0];
+    let mut paths = Vec::new();
+    let viable_starts = grid
         .points
         .iter()
         .flat_map(|row| row.iter())
@@ -118,10 +118,8 @@ fn part_2(input: &String) -> u32 {
         })
         .collect_vec();
 
-    let mut paths = Vec::new();
-
-    for start in a_points_with_b_neighbor {
-        let result = cam_star(
+    for start in viable_starts {
+        let path = cam_star(
             &grid.points[start.y][start.x],
             |point| {
                 grid.get_neighbors(point)
@@ -130,16 +128,14 @@ fn part_2(input: &String) -> u32 {
                     .collect_vec()
             },
             |point| {
-                let end = &grid.points[grid.end.1][grid.end.0];
                 let delta_x = (end.x as i32 - point.x as i32).abs();
                 let delta_y = (end.y as i32 - point.y as i32).abs();
-                let h = (delta_x + delta_y) as u32;
-                h
+                (delta_x + delta_y) as u32
             },
-            |point| point == &grid.points[grid.end.1][grid.end.0],
+            |point| point == end,
         );
 
-        paths.push(result.unwrap());
+        paths.push(path.unwrap());
     }
 
     paths.sort_by(|a, b| a.1.cmp(&b.1));
@@ -147,6 +143,7 @@ fn part_2(input: &String) -> u32 {
     paths.first().unwrap().1
 }
 
+// Cam* algorithm, one of the slowest pathfinding algorithms I've ever seen. Seems to work though.
 fn cam_star<N, H, S>(
     start: &Point,
     mut neighbors: N,
@@ -197,13 +194,13 @@ where
             let open_list_point = open_list.iter_mut().find(|i| i.point == neighbor.0);
             if open_list_point.is_some() {
                 let existing_point = open_list_point.unwrap();
-                let new_point = APoint::from_2(&neighbor.0, &current_point, heuristic(&neighbor.0));
+                let new_point = APoint::from(&neighbor.0, &current_point, heuristic(&neighbor.0));
                 if new_point.f < new_point.f {
                     existing_point.f = new_point.f;
                     existing_point.parent = new_point.parent;
                 }
             } else {
-                open_list.push(APoint::from_2(
+                open_list.push(APoint::from(
                     &neighbor.0,
                     &current_point,
                     heuristic(&neighbor.0),
@@ -224,7 +221,7 @@ struct APoint {
 }
 
 impl APoint {
-    fn from_2(point: &Point, parent: &APoint, h: u32) -> APoint {
+    fn from(point: &Point, parent: &APoint, h: u32) -> APoint {
         let g = parent.g + 1;
 
         let a_point = APoint {

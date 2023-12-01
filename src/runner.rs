@@ -1,19 +1,19 @@
 use colored::Colorize;
 use std::{fmt::Debug, time::Instant};
 
-use crate::{viz, year_2017, year_2022};
+use crate::{viz, year_2017, year_2022, year_2023};
 
 pub fn run<T>(name: &str, func: fn(&String) -> T, input: &String)
 where
     T: Debug,
 {
-    println!("=== {} ===", format!("{}", name).bold());
+    println!("=== {} ===", name.to_string().bold());
     let start = Instant::now();
     let out = func(input);
     let duration = start.elapsed();
     println!("Solution: {}", format!("{:?}", out).bold().green());
     println!("Duration: {}", format!("{:?}", duration).bold().blue());
-    println!("");
+    println!();
 }
 
 pub fn run_day(year: &str, day: &str, contents: String) {
@@ -22,7 +22,7 @@ pub fn run_day(year: &str, day: &str, contents: String) {
         format!("Year {}", year).bold(),
         format!("Day {}", day).bold()
     );
-    println!("");
+    println!();
 
     let solution = get_solution(year, day);
     solution(contents);
@@ -34,7 +34,7 @@ pub fn run_viz(year: &str, day: &str, contents: String) {
         format!("Year {}", year).bold(),
         format!("Day {}", day).bold()
     );
-    println!("");
+    println!();
 
     let visualization = match year {
         "2022" => match day {
@@ -66,6 +66,10 @@ fn get_solution(year: &str, day: &str) -> fn(String) {
             "10" => year_2022::day_10::solution,
             "11" => year_2022::day_11::solution,
             "12" => year_2022::day_12::solution,
+            _ => panic!("No solution for this day"),
+        },
+        "2023" => match day {
+            "01" => year_2023::day_01::solution,
             _ => panic!("No solution for this day"),
         },
         _ => panic!("Year not implemented"),
