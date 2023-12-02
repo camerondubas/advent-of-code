@@ -115,7 +115,7 @@ mod tests {
 
     #[test]
     fn test_part_2_dummy() {
-        let input = get_input("2023", "01", Some("dummy"));
+        let input = get_input("2023", "01", Some("dummy-2"));
         let output = part_2(&input);
         assert_eq!(output, 281);
     }
