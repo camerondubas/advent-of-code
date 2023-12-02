@@ -27,43 +27,13 @@ const NUM_WORDS: [(&str, char); 18] = [
 ];
 
 pub fn part_1(input: &String) -> u32 {
-    let mut sum = 0;
-
-    for line in input.lines() {
-        let mut digits = (None, None);
+    input.lines().fold(0, |acc, line| {
         let mut line_chars = line.chars();
-        while !matches!(digits, (Some(_), Some(_))) {
-            match digits {
-                (None, None) => match line_chars.next() {
-                    Some(line_char) => {
-                        if line_char.is_ascii_digit() {
-                            digits.0 = Some(line_char);
-                            continue;
-                        }
-                    }
-                    None => break,
-                },
-                (Some(_), None) => match line_chars.next_back() {
-                    Some(line_char) => {
-                        if line_char.is_ascii_digit() {
-                            digits.1 = Some(line_char);
-                            continue;
-                        }
-                    }
-                    None => break,
-                },
-                _ => panic!("This should not happen"),
-            }
-        }
+        let first = line_chars.find(|c| c.is_ascii_digit()).unwrap();
+        let last = line_chars.rfind(|c| c.is_ascii_digit()).unwrap_or(first);
 
-        let first_digit = digits.0.unwrap();
-        let last_digit = digits.1.unwrap_or(first_digit);
-        sum += format!("{}{}", first_digit, last_digit)
-            .parse::<u32>()
-            .unwrap();
-    }
-
-    sum
+        acc + format!("{}{}", first, last).parse::<u32>().unwrap()
+    })
 }
 
 pub fn part_2(input: &String) -> u32 {
