@@ -84,7 +84,6 @@ fn draw_crt(crt: &mut [char]) -> String {
     //     println!("{}", crt_line);
     // }
 
-    println!();
     // let mut line = String::from("");
     // crt.iter().for_each(|c| {
     //     // let colored_char = match *char {
@@ -109,7 +108,6 @@ fn draw_crt(crt: &mut [char]) -> String {
 
     let mut output = String::from("");
     for crt_line in crt_lines2 {
-        println!("{}", crt_line);
         output.push_str(&format!("{}\n", crt_line));
     }
 

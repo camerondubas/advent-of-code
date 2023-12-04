@@ -44,9 +44,5 @@ pub fn day_04(c: &mut Criterion) {
     });
 }
 
-criterion_group! {
-  name =  year_2023;
-  config = Criterion::default().sample_size(1000);
-  targets = day_01, day_02, day_03, day_04
-}
+criterion_group!(year_2023, day_01, day_02, day_03, day_04);
 criterion_main!(year_2023);
