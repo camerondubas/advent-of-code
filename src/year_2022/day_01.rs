@@ -1,4 +1,4 @@
-pub fn part_1(input: &String) -> u32 {
+pub fn part_1(input: &str) -> u32 {
     let mut largest = 0;
 
     input.split("\n\n").for_each(|group| {
@@ -16,7 +16,7 @@ pub fn part_1(input: &String) -> u32 {
     largest
 }
 
-pub fn part_2(input: &String) -> u32 {
+pub fn part_2(input: &str) -> u32 {
     let sums = input.split("\n\n").map(|group| {
         let sum = group
             .lines()

@@ -14,7 +14,7 @@ struct Grid {
 }
 
 impl Grid {
-    fn new(input: &String) -> Grid {
+    fn new(input: &str) -> Grid {
         let mut start: Option<(usize, usize)> = None;
         let mut end: Option<(usize, usize)> = None;
         let points = input
@@ -73,7 +73,7 @@ impl Grid {
     }
 }
 
-pub fn part_1(input: &String) -> u32 {
+pub fn part_1(input: &str) -> u32 {
     let grid = Grid::new(input);
     let end = &grid.points[grid.end.1][grid.end.0];
 
@@ -91,7 +91,7 @@ pub fn part_1(input: &String) -> u32 {
     path.unwrap().1
 }
 
-pub fn part_2(input: &String) -> u32 {
+pub fn part_2(input: &str) -> u32 {
     let grid = Grid::new(input);
     let end = &grid.points[grid.end.1][grid.end.0];
     let mut paths = Vec::new();

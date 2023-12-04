@@ -6,7 +6,7 @@ fn get_offset(is_uppercase: bool) -> u32 {
     }
 }
 
-pub fn part_1(input: &String) -> u32 {
+pub fn part_1(input: &str) -> u32 {
     input
         .lines()
         .map(|line| line.split_at(line.len() / 2))
@@ -19,7 +19,7 @@ pub fn part_1(input: &String) -> u32 {
         })
 }
 
-pub fn part_2(input: &String) -> u32 {
+pub fn part_2(input: &str) -> u32 {
     let lines: Vec<&str> = input.lines().collect();
     lines.chunks(3).fold(0, |acc, group| {
         let badge = group[0]
@@ -31,7 +31,7 @@ pub fn part_2(input: &String) -> u32 {
     })
 }
 
-pub fn part_2_sorted(input: &String) -> u32 {
+pub fn part_2_sorted(input: &str) -> u32 {
     let lines: Vec<&str> = input.lines().collect();
     lines.chunks(3).fold(0, |acc, group| {
         let mut clone = group.to_vec();

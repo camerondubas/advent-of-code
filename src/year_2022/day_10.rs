@@ -1,6 +1,6 @@
 use itertools::Itertools;
 
-fn part_1(input: &String) -> i32 {
+pub fn part_1(input: &str) -> i32 {
     let mut register_x: i32 = 1;
     let mut cycle = 0;
     let mut signal_strength: i32 = 0;
@@ -26,7 +26,7 @@ fn part_1(input: &String) -> i32 {
     signal_strength
 }
 
-fn part_2(input: &String) -> String {
+pub fn part_2(input: &str) -> String {
     let mut sprite_position: i32 = 1;
     let mut cycle: i32 = 0;
     let mut crt = vec![' '; 40 * 6];
@@ -50,10 +50,10 @@ fn part_2(input: &String) -> String {
             loaded_instruction = None;
         }
     }
-    draw_crt(&crt)
+    draw_crt(&mut crt)
 }
 
-fn format_input(input: &String) -> Vec<Vec<&str>> {
+fn format_input(input: &str) -> Vec<Vec<&str>> {
     input
         .lines()
         .map(|line| line.split_whitespace().collect_vec())
@@ -68,7 +68,7 @@ fn read_instruction(instruction: Vec<&str>) -> Option<i32> {
     }
 }
 
-fn update_crt(crt: &mut Vec<char>, cycle_num: i32, sprite_position: i32) {
+fn update_crt(crt: &mut [char], cycle_num: i32, sprite_position: i32) {
     let idx = (cycle_num - 1) as usize;
 
     let sprite_range = (sprite_position - 1)..=(sprite_position + 1);
@@ -78,13 +78,13 @@ fn update_crt(crt: &mut Vec<char>, cycle_num: i32, sprite_position: i32) {
     };
 }
 
-fn draw_crt(crt: &Vec<char>) -> String {
+fn draw_crt(crt: &mut [char]) -> String {
     // let crt_lines = crt.chunks(40).map(|chunk| chunk.join("")).collect_vec();
     // for crt_line in crt_lines {
     //     println!("{}", crt_line);
     // }
 
-    println!("");
+    println!();
     // let mut line = String::from("");
     // crt.iter().for_each(|c| {
     //     // let colored_char = match *char {

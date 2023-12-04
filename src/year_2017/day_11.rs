@@ -53,7 +53,7 @@ fn count_steps(coords: (i32, i32)) -> usize {
     steps
 }
 
-pub fn part_1(input: &String) -> usize {
+pub fn part_1(input: &str) -> usize {
     let mut coords: (i32, i32) = (0, 0);
 
     input.split(',').for_each(|direction| {
@@ -73,7 +73,7 @@ pub fn part_1(input: &String) -> usize {
     count_steps(coords)
 }
 
-pub fn part_2(input: &String) -> usize {
+pub fn part_2(input: &str) -> usize {
     let mut coords: (i32, i32) = (0, 0);
     let mut furthest: usize = 0;
 

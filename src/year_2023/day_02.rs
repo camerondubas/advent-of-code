@@ -90,7 +90,7 @@ pub fn part_1(input: &String) -> u32 {
         .sum()
 }
 
-pub fn part_2(input: &String) -> u32 {
+pub fn part_2(input: &str) -> u32 {
     input.lines().map(|line| Game::new(line).power()).sum()
 }
 

@@ -27,12 +27,12 @@ fn at_most_one(num: i32) -> i32 {
         return 1;
     }
 
-    return -1;
+    -1
 }
 
 fn get_next_knot_position(tail: &Position, head: &Position) -> Position {
     let (x, y) = head.distance(tail);
-    let mut new_tail = tail.clone();
+    let mut new_tail = *tail;
 
     if x.abs() >= 2 || y.abs() >= 2 {
         new_tail.x += at_most_one(x);
@@ -42,7 +42,7 @@ fn get_next_knot_position(tail: &Position, head: &Position) -> Position {
     new_tail
 }
 
-fn snake(input: &String, knot_count: usize) -> usize {
+fn snake(input: &str, knot_count: usize) -> usize {
     let mut knots = vec![Position::new(0, 0); knot_count];
     let mut tail_positions = HashSet::new();
 
@@ -75,11 +75,11 @@ fn snake(input: &String, knot_count: usize) -> usize {
     tail_positions.len()
 }
 
-fn part_1(input: &String) -> usize {
+pub fn part_1(input: &str) -> usize {
     snake(input, 2)
 }
 
-fn part_2(input: &String) -> usize {
+pub fn part_2(input: &str) -> usize {
     snake(input, 10)
 }
 

@@ -75,7 +75,7 @@ struct Engine {
 }
 
 impl Engine {
-    fn new(input: &String) -> Self {
+    fn new(input: &str) -> Self {
         let line_len = input.lines().next().unwrap().len();
 
         let mut partial_part: Option<(String, Vec<usize>)> = None;
@@ -160,7 +160,7 @@ impl Engine {
     }
 }
 
-pub fn part_1(input: &String) -> u32 {
+pub fn part_1(input: &str) -> u32 {
     let engine = Engine::new(input);
 
     engine
@@ -170,7 +170,7 @@ pub fn part_1(input: &String) -> u32 {
         .sum::<u32>()
 }
 
-pub fn part_2(input: &String) -> u32 {
+pub fn part_2(input: &str) -> u32 {
     let mut engine = Engine::new(input);
 
     engine.gears().iter().map(|gear| gear.ratio()).sum::<u32>()
@@ -194,7 +194,7 @@ mod tests {
         let input = "........
 .24..4..
 ......*.";
-        let output = part_1(&input.to_string());
+        let output = part_1(input);
         assert_eq!(output, 4);
     }
 
@@ -203,7 +203,7 @@ mod tests {
         let input = "........
 .24$-4..
 ......*.";
-        let output = part_1(&input.to_string());
+        let output = part_1(input);
         assert_eq!(output, 28);
     }
 
@@ -212,7 +212,7 @@ mod tests {
         let input = "11....11
 ..$..$..
 11....11";
-        let output = part_1(&input.to_string());
+        let output = part_1(input);
         assert_eq!(output, 44);
     }
 
@@ -222,7 +222,7 @@ mod tests {
 .1....1.
 .1....1.
 $......$";
-        let output = part_1(&input.to_string());
+        let output = part_1(input);
         assert_eq!(output, 4);
     }
     #[test]
@@ -231,7 +231,7 @@ $......$";
 .11..11.
 .11..11.
 $......$";
-        let output = part_1(&input.to_string());
+        let output = part_1(input);
         assert_eq!(output, 44);
     }
     #[test]

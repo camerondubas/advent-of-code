@@ -1,6 +1,6 @@
 use itertools::Itertools;
 
-fn parse_assignments(input: &String) -> Vec<(u32, u32, u32, u32)> {
+fn parse_assignments(input: &str) -> Vec<(u32, u32, u32, u32)> {
     input
         .lines()
         .map(|assignment| {
@@ -14,7 +14,7 @@ fn parse_assignments(input: &String) -> Vec<(u32, u32, u32, u32)> {
         .collect()
 }
 
-pub fn part_1(input: &String) -> u32 {
+pub fn part_1(input: &str) -> u32 {
     parse_assignments(input)
         .iter()
         .fold(0, |acc, (a1, a2, b1, b2)| {
@@ -28,7 +28,7 @@ pub fn part_1(input: &String) -> u32 {
         })
 }
 
-pub fn part_2(input: &String) -> u32 {
+pub fn part_2(input: &str) -> u32 {
     parse_assignments(input)
         .iter()
         .fold(0, |acc, (a1, a2, b1, b2)| {

@@ -1,6 +1,6 @@
 use itertools::Itertools;
 
-fn create_grid(input: &String) -> Vec<(usize, Vec<(usize, u32)>)> {
+fn create_grid(input: &str) -> Vec<(usize, Vec<(usize, u32)>)> {
     input
         .lines()
         .map(|line| {
@@ -27,23 +27,23 @@ fn check(list: Vec<(usize, u32)>) -> (bool, usize) {
     (true, viewing_distance)
 }
 
-fn get_up(grid: &Vec<(usize, Vec<(usize, u32)>)>, x: usize, y: usize) -> Vec<(usize, u32)> {
+fn get_up(grid: &[(usize, Vec<(usize, u32)>)], x: usize, y: usize) -> Vec<(usize, u32)> {
     grid[..y + 1].iter().map(|f| f.1[x]).rev().collect_vec()
 }
 
-fn get_down(grid: &Vec<(usize, Vec<(usize, u32)>)>, x: usize, y: usize) -> Vec<(usize, u32)> {
+fn get_down(grid: &[(usize, Vec<(usize, u32)>)], x: usize, y: usize) -> Vec<(usize, u32)> {
     grid[y..].iter().map(|f| f.1[x]).collect_vec()
 }
 
-fn get_left(grid: &Vec<(usize, Vec<(usize, u32)>)>, x: usize, y: usize) -> Vec<(usize, u32)> {
+fn get_left(grid: &[(usize, Vec<(usize, u32)>)], x: usize, y: usize) -> Vec<(usize, u32)> {
     grid[y].1[..x + 1].iter().copied().rev().collect_vec()
 }
 
-fn get_right(grid: &Vec<(usize, Vec<(usize, u32)>)>, x: usize, y: usize) -> Vec<(usize, u32)> {
+fn get_right(grid: &[(usize, Vec<(usize, u32)>)], x: usize, y: usize) -> Vec<(usize, u32)> {
     grid[y].1[x..].to_vec()
 }
 
-fn part_1(input: &String) -> usize {
+pub fn part_1(input: &str) -> usize {
     let grid = create_grid(input);
 
     let size = (grid[0].1.len(), grid.len());
@@ -70,7 +70,7 @@ fn part_1(input: &String) -> usize {
     visible_sum
 }
 
-fn part_2(input: &String) -> usize {
+pub fn part_2(input: &str) -> usize {
     let grid = create_grid(input);
     let mut highest_scenic_score = 0;
 

@@ -84,9 +84,9 @@ impl Test {
 
     fn run(self, worry_level: u64) -> usize {
         if worry_level % self.divisor == 0 {
-            return self.true_monkey;
+            self.true_monkey
         } else {
-            return self.false_monkey;
+            self.false_monkey
         }
     }
 }
@@ -107,7 +107,7 @@ impl Monkey {
         let items = lines
             .next()
             .unwrap()
-            .split(":")
+            .split(':')
             .nth(1)
             .unwrap()
             .trim()
@@ -135,22 +135,16 @@ impl Monkey {
     }
 }
 
-fn part_1(input: &String) -> u64 {
-    let monkeys = input
-        .split("\n\n")
-        .map(|raw| Monkey::from(raw))
-        .collect_vec();
+pub fn part_1(input: &str) -> u64 {
+    let monkeys = input.split("\n\n").map(Monkey::from).collect_vec();
     let rounds = 20;
     let reduce_stress = |worry_level: u64| worry_level / 3;
 
     monkey_business(monkeys, rounds, &reduce_stress)
 }
 
-fn part_2(input: &String) -> u64 {
-    let monkeys = input
-        .split("\n\n")
-        .map(|raw| Monkey::from(raw))
-        .collect_vec();
+pub fn part_2(input: &str) -> u64 {
+    let monkeys = input.split("\n\n").map(Monkey::from).collect_vec();
     let rounds = 10_000;
     let lcm = lowest_common_multiple(monkeys.iter().map(|m| m.test.divisor).collect_vec());
     let reduce_stress = |worry_level: u64| worry_level % lcm;

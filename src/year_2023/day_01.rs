@@ -19,7 +19,7 @@ const NUM_WORDS: [(&str, char); 18] = [
     ("9", '9'),
 ];
 
-pub fn part_1(input: &String) -> u32 {
+pub fn part_1(input: &str) -> u32 {
     input.lines().fold(0, |acc, line| {
         let mut line_chars = line.chars();
         let first = line_chars.find(|c| c.is_ascii_digit()).unwrap();
@@ -29,7 +29,7 @@ pub fn part_1(input: &String) -> u32 {
     })
 }
 
-pub fn part_2(input: &String) -> u32 {
+pub fn part_2(input: &str) -> u32 {
     let mut sum = 0;
 
     for line in input.lines() {

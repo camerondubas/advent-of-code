@@ -9,17 +9,18 @@ fn get_position(input: &String, size: usize) -> usize {
         .0
         + size
 }
-fn part_1(input: &String) -> usize {
+
+pub fn part_1(input: &String) -> usize {
     let packet_size = 4;
     get_position(input, packet_size)
 }
 
-fn part_2(input: &String) -> usize {
+pub fn part_2(input: &String) -> usize {
     let message_size = 14;
     get_position(input, message_size)
 }
 
-fn part_2_bytes(input: &String) -> usize {
+pub fn part_2_bytes(input: &String) -> usize {
     let message_size = 14;
     input
         .as_bytes()

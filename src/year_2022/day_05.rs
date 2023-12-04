@@ -38,7 +38,7 @@ fn compute_instructions(raw_instructions: &str) -> Vec<(usize, usize, usize)> {
 
     computed_instructions
 }
-pub fn part_1(input: &String) -> String {
+pub fn part_1(input: &str) -> String {
     let mut sections = input.split("\n\n");
     let mut computed_stacks = compute_stacks(sections.next().unwrap());
     let computed_instructions = compute_instructions(sections.next().unwrap());
@@ -56,7 +56,7 @@ pub fn part_1(input: &String) -> String {
         .join("")
 }
 
-pub fn part_2(input: &String) -> String {
+pub fn part_2(input: &str) -> String {
     let mut sections = input.split("\n\n");
     let mut computed_stacks = compute_stacks(sections.next().unwrap());
     let computed_instructions = compute_instructions(sections.next().unwrap());

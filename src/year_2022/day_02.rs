@@ -6,7 +6,7 @@ const WIN: u32 = 6;
 const DRAW: u32 = 3;
 const LOSE: u32 = 0;
 
-pub fn part_1(input: &String) -> u32 {
+pub fn part_1(input: &str) -> u32 {
     let scores = input.lines().map(|line| {
         let pair: Vec<u32> = line
             .chars()
@@ -34,7 +34,7 @@ pub fn part_1(input: &String) -> u32 {
     scores.sum()
 }
 
-pub fn part_2(input: &String) -> u32 {
+pub fn part_2(input: &str) -> u32 {
     let scores = input.lines().map(|line| {
         let pair: Vec<u32> = line
             .chars()

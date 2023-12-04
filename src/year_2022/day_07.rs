@@ -22,7 +22,7 @@ fn is_command(line_segment: Option<&&str>) -> bool {
     line_segment.unwrap().eq(&"$")
 }
 
-fn parse_input(input: &String) -> Vec<(Vec<&str>, u32)> {
+fn parse_input(input: &str) -> Vec<(Vec<&str>, u32)> {
     let mut current_dir = vec!["/"];
     let mut lines = input.lines().peekable();
     let mut files: Vec<(Vec<&str>, u32)> = vec![];
@@ -77,7 +77,7 @@ fn compute_dirs(files: Vec<(Vec<&str>, u32)>) -> HashMap<String, u32> {
     dirs
 }
 
-fn part_1(input: &String) -> usize {
+pub fn part_1(input: &str) -> usize {
     let files = parse_input(input);
     let dirs = compute_dirs(files);
     let max_size = 100_000;
@@ -91,7 +91,7 @@ fn part_1(input: &String) -> usize {
     sum as usize
 }
 
-fn part_2(input: &String) -> usize {
+pub fn part_2(input: &str) -> usize {
     let files = parse_input(input);
     let dirs = compute_dirs(files);
 
