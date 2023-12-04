@@ -1,12 +1,5 @@
 use std::cmp::Ordering;
 
-use crate::runner::run;
-
-pub fn solution(contents: String) {
-    run("Part 1", part_1, &contents);
-    run("Part 2", part_2, &contents);
-}
-
 fn count_steps(coords: (i32, i32)) -> usize {
     let mut steps = 0;
 
@@ -60,7 +53,7 @@ fn count_steps(coords: (i32, i32)) -> usize {
     steps
 }
 
-fn part_1(input: &String) -> usize {
+pub fn part_1(input: &String) -> usize {
     let mut coords: (i32, i32) = (0, 0);
 
     input.split(',').for_each(|direction| {
@@ -80,7 +73,7 @@ fn part_1(input: &String) -> usize {
     count_steps(coords)
 }
 
-fn part_2(input: &String) -> usize {
+pub fn part_2(input: &String) -> usize {
     let mut coords: (i32, i32) = (0, 0);
     let mut furthest: usize = 0;
 
@@ -104,4 +97,39 @@ fn part_2(input: &String) -> usize {
     });
 
     furthest
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::get_input;
+
+    use super::*;
+
+    #[test]
+    fn test_part_1_dummy() {
+        let input = get_input("2017", "11", Some("dummy"));
+        let output = part_1(&input);
+        assert_eq!(output, 3);
+    }
+
+    #[test]
+    fn test_part_1() {
+        let input = get_input("2017", "11", None);
+        let output = part_1(&input);
+        assert_eq!(output, 824);
+    }
+
+    #[test]
+    fn test_part_2_dummy() {
+        let input = get_input("2017", "11", Some("dummy"));
+        let output = part_2(&input);
+        assert_eq!(output, 5);
+    }
+
+    #[test]
+    fn test_part_2() {
+        let input = get_input("2017", "11", None);
+        let output = part_2(&input);
+        assert_eq!(output, 1548);
+    }
 }
