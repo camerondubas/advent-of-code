@@ -1,9 +1,24 @@
 # Advent Of Code
 
 ## 2022
+1. [Trebuchet?!](/2023/01)
+2. [Cube Conundrum](/2023/02)
+3. [Gear Ratios](/2023/03)
+4. [Scratchcards](/2023/04)
+
+## 2022
 1. [Calorie Counting](/2022/01)
 2. [Rock Paper Scissors](/2022/02)
 3. [Rucksack Reorganization](/2022/03)
+4. [Camp Cleanup](/2022/04)
+5. [Supply Stacks](/2022/05)
+6. [Tuning Trouble](/2022/06)
+7. [No Space Left On Device](/2022/07)
+8. [Treetop Tree House](/2022/08)
+9. [Rope Bridge](/2022/09)
+10. [Cathode-Ray Tube](/2022/10)
+11. [Monkey in the Middle](/2022/11)
+12. [Hill Climbing Algorithm](/2022/12)
 
 ## 2021
 

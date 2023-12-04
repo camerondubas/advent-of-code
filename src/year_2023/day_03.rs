@@ -2,13 +2,6 @@ use std::collections::HashSet;
 
 use itertools::Itertools;
 
-use crate::runner::run;
-
-pub fn solution(contents: String) {
-    run("Part 1", part_1, &contents);
-    run("Part 2", part_2, &contents);
-}
-
 #[derive(Debug, Default)]
 struct Part {
     number: u32,
@@ -23,7 +16,7 @@ impl Part {
         }
     }
 
-    fn adjacents(&self, line_len: usize, full_len: usize) -> HashSet<usize> {
+    fn adjacents(&self, line_len: usize) -> HashSet<usize> {
         let mut adjacents: HashSet<usize> = HashSet::new();
 
         for pos in &self.range {
@@ -49,10 +42,8 @@ impl Part {
                 ]);
             }
 
-            let add_adjacents = all_adjacents
-                .iter()
-                .filter_map(|x| *x)
-                .filter(|x| *x < full_len);
+            let add_adjacents = all_adjacents.iter().filter_map(|x| *x);
+
             adjacents.extend(add_adjacents)
         }
 
@@ -78,7 +69,6 @@ impl Gear {
 #[derive(Debug, Default)]
 struct Engine {
     line_len: usize,
-    full_len: usize,
     parts: Vec<Part>,
     symbols: Vec<usize>,
     possible_gears: Vec<Gear>,
@@ -86,9 +76,7 @@ struct Engine {
 
 impl Engine {
     fn new(input: &String) -> Self {
-        let len_count = input.lines().count();
         let line_len = input.lines().next().unwrap().len();
-        let full_len = len_count * line_len;
 
         let mut partial_part: Option<(String, Vec<usize>)> = None;
         let mut parts: Vec<Part> = vec![];
@@ -131,7 +119,6 @@ impl Engine {
 
         Self {
             line_len,
-            full_len,
             parts,
             symbols,
             possible_gears,
@@ -142,7 +129,7 @@ impl Engine {
 
         self.parts.iter().for_each(|part| {
             let is_adjacent_to_symbol = part
-                .adjacents(self.line_len, self.full_len)
+                .adjacents(self.line_len)
                 .iter()
                 .any(|adjacent| self.symbols.iter().any(|symbol| symbol == adjacent));
 
@@ -156,7 +143,7 @@ impl Engine {
 
     fn gears(&mut self) -> Vec<Gear> {
         self.parts.iter().for_each(|part| {
-            for adjacent in part.adjacents(self.line_len, self.full_len) {
+            for adjacent in part.adjacents(self.line_len) {
                 for gear in &mut self.possible_gears {
                     if gear.index == adjacent {
                         gear.parts.push(part.number)
@@ -253,8 +240,6 @@ $......$";
         let output = part_1(&input);
         assert_eq!(output, 554003);
     }
-
-    // 1510003 too high
 
     #[test]
     fn test_part_2_dummy() {

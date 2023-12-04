@@ -1,15 +1,7 @@
+use itertools::Itertools;
 use std::collections::HashMap;
 
-use itertools::Itertools;
-
-use crate::runner::run;
-
-pub fn solution(contents: String) {
-    run("Part 1", part_1, &contents);
-    run("Part 2", part_2, &contents);
-}
-
-pub fn part_1(input: &String) -> u32 {
+pub fn part_1(input: &str) -> u32 {
     input.lines().fold(0, |acc, line| {
         let (_, nums) = line.split_once(": ").unwrap();
         let (winning_nums, your_nums) = nums.split_once(" | ").unwrap();
@@ -28,29 +20,27 @@ pub fn part_1(input: &String) -> u32 {
     })
 }
 
-pub fn part_2(input: &String) -> u32 {
+pub fn part_2(input: &str) -> u32 {
     input
         .lines()
         .enumerate()
         .fold(HashMap::new(), |mut cards, (idx, line)| {
             let (_, nums) = line.split_once(": ").unwrap();
             let id = idx + 1;
-            let (winning_nums, your_nums) = nums.split_once(" | ").unwrap();
+            let (winning_nums, card_nums) = nums.split_once(" | ").unwrap();
+            let current_card_count = cards.get(&id).unwrap_or(&0) + 1;
+            cards.insert(id, current_card_count);
 
             let winning_nums = winning_nums.split_whitespace().collect_vec();
-            let match_count = your_nums
+            let match_count = card_nums
                 .split_whitespace()
                 .filter(|x| winning_nums.contains(x))
                 .count();
 
-            let current_card_count = cards.get(&id).unwrap_or(&0) + 1;
-            cards.insert(id, current_card_count);
-
             for card_copy in 0..match_count {
-                let card_copy = id + card_copy + 1;
-
-                let card = cards.get(&card_copy).unwrap_or(&0);
-                cards.insert(card_copy, card + current_card_count);
+                let card_copy_id = id + card_copy + 1;
+                let card_count = cards.get(&card_copy_id).unwrap_or(&0);
+                cards.insert(card_copy_id, card_count + current_card_count);
             }
             cards
         })

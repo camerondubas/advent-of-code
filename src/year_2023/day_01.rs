@@ -1,10 +1,3 @@
-use crate::runner::run;
-
-pub fn solution(contents: String) {
-    run("Part 1", part_1, &contents);
-    run("Part 2", part_2, &contents);
-}
-
 const NUM_WORDS: [(&str, char); 18] = [
     ("one", '1'),
     ("two", '2'),
