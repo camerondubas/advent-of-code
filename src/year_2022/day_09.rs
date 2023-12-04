@@ -1,6 +1,5 @@
-use std::{collections::HashSet, vec};
+use std::collections::HashSet;
 
-use crate::runner::run;
 use itertools::Itertools;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -17,11 +16,6 @@ impl Position {
     fn distance(&self, pos: &Position) -> (i32, i32) {
         (self.x - pos.x, self.y - pos.y)
     }
-}
-
-pub fn solution(contents: String) {
-    run("Part 1", part_1, &contents);
-    run("Part 2", part_2, &contents);
 }
 
 fn at_most_one(num: i32) -> i32 {

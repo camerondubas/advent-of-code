@@ -1,10 +1,4 @@
-use crate::runner::run;
 use itertools::Itertools;
-
-pub fn solution(contents: String) {
-    run("Part 1", part_1, &contents);
-    run("Part 2", part_2, &contents);
-}
 
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 struct Point {
@@ -79,7 +73,7 @@ impl Grid {
     }
 }
 
-fn part_1(input: &String) -> u32 {
+pub fn part_1(input: &String) -> u32 {
     let grid = Grid::new(input);
     let end = &grid.points[grid.end.1][grid.end.0];
 
@@ -97,7 +91,7 @@ fn part_1(input: &String) -> u32 {
     path.unwrap().1
 }
 
-fn part_2(input: &String) -> u32 {
+pub fn part_2(input: &String) -> u32 {
     let grid = Grid::new(input);
     let end = &grid.points[grid.end.1][grid.end.0];
     let mut paths = Vec::new();

@@ -1,5 +1,3 @@
-use crate::runner::run;
-
 const ROCK: u32 = 1;
 const PAPER: u32 = 2;
 const SCISSORS: u32 = 3;
@@ -8,12 +6,7 @@ const WIN: u32 = 6;
 const DRAW: u32 = 3;
 const LOSE: u32 = 0;
 
-pub fn solution(contents: String) {
-    run("Part 1", part_1, &contents);
-    run("Part 2", part_2, &contents);
-}
-
-fn part_1(input: &String) -> u32 {
+pub fn part_1(input: &String) -> u32 {
     let scores = input.lines().map(|line| {
         let pair: Vec<u32> = line
             .chars()
@@ -41,7 +34,7 @@ fn part_1(input: &String) -> u32 {
     scores.sum()
 }
 
-fn part_2(input: &String) -> u32 {
+pub fn part_2(input: &String) -> u32 {
     let scores = input.lines().map(|line| {
         let pair: Vec<u32> = line
             .chars()

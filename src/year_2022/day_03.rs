@@ -1,5 +1,3 @@
-use crate::runner::run;
-
 fn get_offset(is_uppercase: bool) -> u32 {
     if is_uppercase {
         64 - 26
@@ -8,13 +6,7 @@ fn get_offset(is_uppercase: bool) -> u32 {
     }
 }
 
-pub fn solution(contents: String) {
-    run("Part 1", part_1, &contents);
-    run("Part 2", part_2, &contents);
-    run("Part 2 Sorted", part_2_sorted, &contents);
-}
-
-fn part_1(input: &String) -> u32 {
+pub fn part_1(input: &String) -> u32 {
     input
         .lines()
         .map(|line| line.split_at(line.len() / 2))
@@ -27,7 +19,7 @@ fn part_1(input: &String) -> u32 {
         })
 }
 
-fn part_2(input: &String) -> u32 {
+pub fn part_2(input: &String) -> u32 {
     let lines: Vec<&str> = input.lines().collect();
     lines.chunks(3).fold(0, |acc, group| {
         let badge = group[0]
@@ -39,7 +31,7 @@ fn part_2(input: &String) -> u32 {
     })
 }
 
-fn part_2_sorted(input: &String) -> u32 {
+pub fn part_2_sorted(input: &String) -> u32 {
     let lines: Vec<&str> = input.lines().collect();
     lines.chunks(3).fold(0, |acc, group| {
         let mut clone = group.to_vec();

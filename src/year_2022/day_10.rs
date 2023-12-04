@@ -1,13 +1,4 @@
-use std::vec;
-
-use crate::runner::run;
-use colored::Colorize;
 use itertools::Itertools;
-
-pub fn solution(contents: String) {
-    run("Part 1", part_1, &contents);
-    run("Part 2", part_2, &contents);
-}
 
 fn part_1(input: &String) -> i32 {
     let mut register_x: i32 = 1;

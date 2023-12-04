@@ -1,11 +1,4 @@
-use crate::runner::run;
 use itertools::Itertools;
-
-pub fn solution(contents: String) {
-    run("Part 1", part_1, &contents);
-    run("Part 2", part_2, &contents);
-    run("Part 2 Bytes", part_2_bytes, &contents);
-}
 
 fn get_position(input: &String, size: usize) -> usize {
     input
@@ -68,6 +61,13 @@ mod tests {
     fn test_part_2() {
         let input = get_input("2022", "06", None);
         let output = part_2(&input);
+        assert_eq!(output, 3476);
+    }
+
+    #[test]
+    fn test_part_2_bytes() {
+        let input = get_input("2022", "06", None);
+        let output = part_2_bytes(&input);
         assert_eq!(output, 3476);
     }
 }

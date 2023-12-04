@@ -1,10 +1,4 @@
-use crate::runner::run;
 use itertools::Itertools;
-
-pub fn solution(contents: String) {
-    run("Part 1", part_1, &contents);
-    run("Part 2", part_2, &contents);
-}
 
 fn compute_stacks(raw_stacks: &str) -> Vec<Vec<char>> {
     let mut rev = raw_stacks.lines().rev();
@@ -44,7 +38,7 @@ fn compute_instructions(raw_instructions: &str) -> Vec<(usize, usize, usize)> {
 
     computed_instructions
 }
-fn part_1(input: &String) -> String {
+pub fn part_1(input: &String) -> String {
     let mut sections = input.split("\n\n");
     let mut computed_stacks = compute_stacks(sections.next().unwrap());
     let computed_instructions = compute_instructions(sections.next().unwrap());
@@ -62,7 +56,7 @@ fn part_1(input: &String) -> String {
         .join("")
 }
 
-fn part_2(input: &String) -> String {
+pub fn part_2(input: &String) -> String {
     let mut sections = input.split("\n\n");
     let mut computed_stacks = compute_stacks(sections.next().unwrap());
     let computed_instructions = compute_instructions(sections.next().unwrap());

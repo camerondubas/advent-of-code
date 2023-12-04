@@ -1,10 +1,4 @@
-use crate::runner::run;
 use itertools::Itertools;
-
-pub fn solution(contents: String) {
-    run("Part 1", part_1, &contents);
-    run("Part 2", part_2, &contents);
-}
 
 fn parse_assignments(input: &String) -> Vec<(u32, u32, u32, u32)> {
     input
@@ -20,7 +14,7 @@ fn parse_assignments(input: &String) -> Vec<(u32, u32, u32, u32)> {
         .collect()
 }
 
-fn part_1(input: &String) -> u32 {
+pub fn part_1(input: &String) -> u32 {
     parse_assignments(input)
         .iter()
         .fold(0, |acc, (a1, a2, b1, b2)| {
@@ -34,7 +28,7 @@ fn part_1(input: &String) -> u32 {
         })
 }
 
-fn part_2(input: &String) -> u32 {
+pub fn part_2(input: &String) -> u32 {
     parse_assignments(input)
         .iter()
         .fold(0, |acc, (a1, a2, b1, b2)| {

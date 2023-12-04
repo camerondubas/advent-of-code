@@ -1,10 +1,4 @@
-use crate::runner::run;
 use itertools::Itertools;
-
-pub fn solution(contents: String) {
-    run("Part 1", part_1, &contents);
-    run("Part 2", part_2, &contents);
-}
 
 fn create_grid(input: &String) -> Vec<(usize, Vec<(usize, u32)>)> {
     input

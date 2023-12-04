@@ -1,11 +1,4 @@
-use crate::runner::run;
-
-pub fn solution(contents: String) {
-    run("Part 1", part_1, &contents);
-    run("Part 2", part_2, &contents);
-}
-
-fn part_1(input: &String) -> u32 {
+pub fn part_1(input: &String) -> u32 {
     let mut largest = 0;
 
     input.split("\n\n").for_each(|group| {
@@ -23,7 +16,7 @@ fn part_1(input: &String) -> u32 {
     largest
 }
 
-fn part_2(input: &String) -> u32 {
+pub fn part_2(input: &String) -> u32 {
     let sums = input.split("\n\n").map(|group| {
         let sum = group
             .lines()

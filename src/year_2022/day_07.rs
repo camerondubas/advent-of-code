@@ -1,12 +1,6 @@
 use std::collections::HashMap;
 
-use crate::runner::run;
 use itertools::Itertools;
-
-pub fn solution(contents: String) {
-    run("Part 1", part_1, &contents);
-    run("Part 2", part_2, &contents);
-}
 
 fn change_dir<'a>(path: &'a str, current_dir: Vec<&'a str>) -> Vec<&'a str> {
     match path {

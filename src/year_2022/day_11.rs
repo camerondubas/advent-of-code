@@ -1,13 +1,7 @@
 use primes::{PrimeSet, Sieve};
 use std::vec;
 
-use crate::runner::run;
 use itertools::Itertools;
-
-pub fn solution(contents: String) {
-    run("Part 1", part_1, &contents);
-    run("Part 2", part_2, &contents);
-}
 
 fn lowest_common_multiple(nums: Vec<u64>) -> u64 {
     let mut pset = Sieve::new();
