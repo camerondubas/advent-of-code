@@ -94,3 +94,38 @@ fn part_2(input: &String) -> usize {
     }
     highest_scenic_score
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::get_input;
+
+    use super::*;
+
+    #[test]
+    fn test_part_1_dummy() {
+        let input = get_input("2022", "08", Some("dummy"));
+        let output = part_1(&input);
+        assert_eq!(output, 21);
+    }
+
+    #[test]
+    fn test_part_1() {
+        let input = get_input("2022", "08", None);
+        let output = part_1(&input);
+        assert_eq!(output, 1779);
+    }
+
+    #[test]
+    fn test_part_2_dummy() {
+        let input = get_input("2022", "08", Some("dummy"));
+        let output = part_2(&input);
+        assert_eq!(output, 8);
+    }
+
+    #[test]
+    fn test_part_2() {
+        let input = get_input("2022", "08", None);
+        let output = part_2(&input);
+        assert_eq!(output, 172224);
+    }
+}

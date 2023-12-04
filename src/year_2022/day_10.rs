@@ -35,10 +35,10 @@ fn part_1(input: &String) -> i32 {
     signal_strength
 }
 
-fn part_2(input: &String) -> i32 {
+fn part_2(input: &String) -> String {
     let mut sprite_position: i32 = 1;
     let mut cycle: i32 = 0;
-    let mut crt = vec![" "; 40 * 6];
+    let mut crt = vec![' '; 40 * 6];
     let mut loaded_instruction: Option<i32> = None;
     let mut instructions = format_input(input).into_iter().peekable();
 
@@ -59,8 +59,7 @@ fn part_2(input: &String) -> i32 {
             loaded_instruction = None;
         }
     }
-    draw_crt(&crt);
-    0
+    draw_crt(&crt)
 }
 
 fn format_input(input: &String) -> Vec<Vec<&str>> {
@@ -78,41 +77,109 @@ fn read_instruction(instruction: Vec<&str>) -> Option<i32> {
     }
 }
 
-fn update_crt(crt: &mut Vec<&str>, cycle_num: i32, sprite_position: i32) {
+fn update_crt(crt: &mut Vec<char>, cycle_num: i32, sprite_position: i32) {
     let idx = (cycle_num - 1) as usize;
 
     let sprite_range = (sprite_position - 1)..=(sprite_position + 1);
     crt[idx] = match sprite_range.contains(&((idx as i32) % 40)) {
-        true => "#",
-        false => " ",
+        true => '#',
+        false => '.',
     };
 }
 
-fn draw_crt(crt: &Vec<&str>) {
+fn draw_crt(crt: &Vec<char>) -> String {
     // let crt_lines = crt.chunks(40).map(|chunk| chunk.join("")).collect_vec();
     // for crt_line in crt_lines {
     //     println!("{}", crt_line);
     // }
 
     println!("");
-    let mut line = String::from("");
-    crt.iter().for_each(|char| {
-        let colored_char = match *char {
-            "#" => " ".on_black(),
-            _ => " ".on_green(),
-        };
+    // let mut line = String::from("");
+    // crt.iter().for_each(|c| {
+    //     // let colored_char = match *char {
+    //     //     "#" => " ".on_black(),
+    //     //     _ => " ".on_green(),
+    //     // };
 
-        line.push_str(&colored_char.to_string());
-    });
+    //     // line.push_str(&colored_char.to_string());
+    // });
 
-    let crt_lines2: Vec<String> = line
-        .chars()
-        .collect::<Vec<char>>()
-        .chunks(40 * 10)
+    let crt_lines2: Vec<String> = crt
+        .chunks(40)
         .map(|c| c.iter().collect::<String>())
         .collect_vec();
 
+    // let crt_lines2: Vec<String> = line
+    //     .chars()
+    //     .collect::<Vec<char>>()
+    //     .chunks(40 * 10)
+    //     .map(|c| c.iter().collect::<String>())
+    //     .collect_vec();
+
+    let mut output = String::from("");
     for crt_line in crt_lines2 {
         println!("{}", crt_line);
+        output.push_str(&format!("{}\n", crt_line));
+    }
+
+    output
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::get_input;
+
+    use super::*;
+
+    #[test]
+    fn test_part_1_dummy() {
+        let input = get_input("2022", "10", Some("dummy"));
+        let output = part_1(&input);
+        assert_eq!(output, 13140);
+    }
+
+    #[test]
+    fn test_part_1() {
+        let input = get_input("2022", "10", None);
+        let output = part_1(&input);
+        assert_eq!(output, 12520);
+    }
+
+    #[test]
+    fn test_part_2_dummy() {
+        let input = get_input("2022", "10", Some("dummy"));
+        let output = part_2(&input);
+        assert_eq!(
+            output,
+            String::from(
+                "
+##..##..##..##..##..##..##..##..##..##..
+###...###...###...###...###...###...###.
+####....####....####....####....####....
+#####.....#####.....#####.....#####.....
+######......######......######......####
+#######.......#######.......#######.....\n"
+            )
+            .trim_start()
+        );
+    }
+
+    #[test]
+    fn test_part_2() {
+        let input = get_input("2022", "10", None);
+        let output = part_2(&input);
+        assert_eq!(
+            output,
+            String::from(
+                "
+####.#..#.###..####.###....##..##..#....
+#....#..#.#..#....#.#..#....#.#..#.#....
+###..####.#..#...#..#..#....#.#....#....
+#....#..#.###...#...###.....#.#.##.#....
+#....#..#.#....#....#....#..#.#..#.#....
+####.#..#.#....####.#.....##...###.####.\n"
+            )
+            .trim_start()
+        );
     }
 }

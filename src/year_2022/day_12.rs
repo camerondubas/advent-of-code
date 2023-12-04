@@ -74,7 +74,7 @@ impl Grid {
         neighbors
             .iter()
             .filter(|target| target.value <= (point.value + 1))
-            .map(|p| *p)
+            .copied()
             .collect_vec()
     }
 }
@@ -88,13 +88,8 @@ fn part_1(input: &String) -> u32 {
         |point| {
             grid.get_neighbors(point)
                 .into_iter()
-                .map(|p| (p.clone(), 1))
+                .map(|p| (*p, 1))
                 .collect_vec()
-        },
-        |point| {
-            let delta_x = (end.x as i32 - point.x as i32).abs();
-            let delta_y = (end.y as i32 - point.y as i32).abs();
-            (delta_x + delta_y) as u32
         },
         |point| point == end,
     );
@@ -124,13 +119,8 @@ fn part_2(input: &String) -> u32 {
             |point| {
                 grid.get_neighbors(point)
                     .into_iter()
-                    .map(|p| (p.clone(), 1))
+                    .map(|p| (*p, 1))
                     .collect_vec()
-            },
-            |point| {
-                let delta_x = (end.x as i32 - point.x as i32).abs();
-                let delta_y = (end.y as i32 - point.y as i32).abs();
-                (delta_x + delta_y) as u32
             },
             |point| point == end,
         );
@@ -144,25 +134,22 @@ fn part_2(input: &String) -> u32 {
 }
 
 // Cam* algorithm, one of the slowest pathfinding algorithms I've ever seen. Seems to work though.
-fn cam_star<N, H, S>(
+fn cam_star<N, S>(
     start: &Point,
     mut neighbors: N,
-    mut heuristic: H,
     mut success_condition: S,
 ) -> Option<(Vec<Point>, u32)>
 where
     N: FnMut(&Point) -> Vec<(Point, u32)>,
-    H: FnMut(&Point) -> u32,
     S: FnMut(&Point) -> bool,
 {
     let mut closed_list: Vec<APoint> = Vec::new();
     let mut open_list: Vec<APoint> = Vec::new();
 
     let first_point = APoint {
-        point: start.clone(),
+        point: *start,
         parent: None,
         g: 0,
-        f: heuristic(start),
     };
 
     open_list.push(first_point.clone());
@@ -179,7 +166,7 @@ where
             let mut path = vec![];
             while last.parent.is_some() {
                 let parent = last.parent.as_ref().unwrap();
-                path.push(parent.point.clone());
+                path.push(parent.point);
                 last = parent;
             }
             let len = path.len() as u32;
@@ -192,19 +179,8 @@ where
             }
 
             let open_list_point = open_list.iter_mut().find(|i| i.point == neighbor.0);
-            if open_list_point.is_some() {
-                let existing_point = open_list_point.unwrap();
-                let new_point = APoint::from(&neighbor.0, &current_point, heuristic(&neighbor.0));
-                if new_point.f < new_point.f {
-                    existing_point.f = new_point.f;
-                    existing_point.parent = new_point.parent;
-                }
-            } else {
-                open_list.push(APoint::from(
-                    &neighbor.0,
-                    &current_point,
-                    heuristic(&neighbor.0),
-                ));
+            if open_list_point.is_none() {
+                open_list.push(APoint::from(&neighbor.0, &current_point));
             }
         }
     }
@@ -217,19 +193,51 @@ struct APoint {
     point: Point,
     parent: Option<Box<APoint>>,
     g: u32,
-    f: u32,
 }
 
 impl APoint {
-    fn from(point: &Point, parent: &APoint, h: u32) -> APoint {
+    fn from(point: &Point, parent: &APoint) -> APoint {
         let g = parent.g + 1;
 
-        let a_point = APoint {
-            point: point.clone(),
+        APoint {
+            point: *point,
             parent: Some(Box::new(parent.clone())),
             g,
-            f: g + h,
-        };
-        a_point
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::get_input;
+
+    use super::*;
+
+    #[test]
+    fn test_part_1_dummy() {
+        let input = get_input("2022", "12", Some("dummy"));
+        let output = part_1(&input);
+        assert_eq!(output, 31);
+    }
+
+    #[test]
+    fn test_part_1() {
+        let input = get_input("2022", "12", None);
+        let output = part_1(&input);
+        assert_eq!(output, 420);
+    }
+
+    #[test]
+    fn test_part_2_dummy() {
+        let input = get_input("2022", "12", Some("dummy"));
+        let output = part_2(&input);
+        assert_eq!(output, 29);
+    }
+
+    #[test]
+    fn test_part_2() {
+        let input = get_input("2022", "12", None);
+        let output = part_2(&input);
+        assert_eq!(output, 414);
     }
 }

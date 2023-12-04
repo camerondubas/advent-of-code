@@ -36,3 +36,38 @@ fn part_2_bytes(input: &String) -> usize {
         .0
         + message_size
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::get_input;
+
+    use super::*;
+
+    #[test]
+    fn test_part_1_dummy() {
+        let input = get_input("2022", "06", Some("dummy"));
+        let output = part_1(&input);
+        assert_eq!(output, 5);
+    }
+
+    #[test]
+    fn test_part_1() {
+        let input = get_input("2022", "06", None);
+        let output = part_1(&input);
+        assert_eq!(output, 1210);
+    }
+
+    #[test]
+    fn test_part_2_dummy() {
+        let input = get_input("2022", "06", Some("dummy"));
+        let output = part_2(&input);
+        assert_eq!(output, 23);
+    }
+
+    #[test]
+    fn test_part_2() {
+        let input = get_input("2022", "06", None);
+        let output = part_2(&input);
+        assert_eq!(output, 3476);
+    }
+}
