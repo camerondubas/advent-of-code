@@ -1,12 +1,16 @@
 # Advent Of Code
 
-## 2022
+## 2023
+
 1. [Trebuchet?!](/2023/01)
 2. [Cube Conundrum](/2023/02)
 3. [Gear Ratios](/2023/03)
 4. [Scratchcards](/2023/04)
+5. [If You Give A Seed A Fertilizer](/2023/05)
+6. [Wait For It](/2023/06)
 
 ## 2022
+
 1. [Calorie Counting](/2022/01)
 2. [Rock Paper Scissors](/2022/02)
 3. [Rucksack Reorganization](/2022/03)
