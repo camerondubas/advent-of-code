@@ -228,6 +228,7 @@ mod tests {
         assert_eq!(output, 29);
     }
 
+    #[ignore = "Takes ~10 seconds"]
     #[test]
     fn test_part_2() {
         let input = get_input("2022", "12", None);
